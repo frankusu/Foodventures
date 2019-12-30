@@ -15,6 +15,6 @@ Saved a pizzria? Of course... 🍕
 
 Current location will show you what you are near and which adventure awaits you !! 
 
-Currently in development. Will be in the app store soon.
+Currently in development. Will be in the app store soon.  
 
-If you would like to work with me or reach out hiring opportunities please feel free to email franksu.work@gmail.com
+If you would like to work with me or reach out for hiring opportunities please feel free to email franksu.work@gmail.com
