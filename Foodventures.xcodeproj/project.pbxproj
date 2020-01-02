@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		4EDD627E23B9AC72007B2861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD627D23B9AC72007B2861 /* AppDelegate.swift */; };
 		4EDD628023B9AC72007B2861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD627F23B9AC72007B2861 /* SceneDelegate.swift */; };
-		4EDD628223B9AC72007B2861 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD628123B9AC72007B2861 /* ViewController.swift */; };
+		4EDD628223B9AC72007B2861 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD628123B9AC72007B2861 /* MapViewController.swift */; };
 		4EDD628523B9AC72007B2861 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EDD628323B9AC72007B2861 /* Main.storyboard */; };
 		4EDD628723B9AC7B007B2861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EDD628623B9AC7B007B2861 /* Assets.xcassets */; };
 		4EDD628A23B9AC7B007B2861 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EDD628823B9AC7B007B2861 /* LaunchScreen.storyboard */; };
+		4EDD629223BADF39007B2861 /* RestaurantSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD629123BADF39007B2861 /* RestaurantSearchTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4EDD627A23B9AC72007B2861 /* Foodventures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodventures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EDD627D23B9AC72007B2861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EDD627F23B9AC72007B2861 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4EDD628123B9AC72007B2861 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4EDD628123B9AC72007B2861 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		4EDD628423B9AC72007B2861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EDD628623B9AC7B007B2861 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EDD628923B9AC7B007B2861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EDD628B23B9AC7B007B2861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EDD629123BADF39007B2861 /* RestaurantSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,8 @@
 			children = (
 				4EDD627D23B9AC72007B2861 /* AppDelegate.swift */,
 				4EDD627F23B9AC72007B2861 /* SceneDelegate.swift */,
-				4EDD628123B9AC72007B2861 /* ViewController.swift */,
+				4EDD628123B9AC72007B2861 /* MapViewController.swift */,
+				4EDD629123BADF39007B2861 /* RestaurantSearchTable.swift */,
 				4EDD628323B9AC72007B2861 /* Main.storyboard */,
 				4EDD628623B9AC7B007B2861 /* Assets.xcassets */,
 				4EDD628823B9AC7B007B2861 /* LaunchScreen.storyboard */,
@@ -138,7 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EDD628223B9AC72007B2861 /* ViewController.swift in Sources */,
+				4EDD628223B9AC72007B2861 /* MapViewController.swift in Sources */,
+				4EDD629223BADF39007B2861 /* RestaurantSearchTable.swift in Sources */,
 				4EDD627E23B9AC72007B2861 /* AppDelegate.swift in Sources */,
 				4EDD628023B9AC72007B2861 /* SceneDelegate.swift in Sources */,
 			);
