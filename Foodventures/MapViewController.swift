@@ -24,32 +24,9 @@ class MapViewController: UIViewController {
     var restaurantSearchTable = RestaurantSearchTable()
     lazy var searchController = UISearchController(searchResultsController: restaurantSearchTable)
     
-    let apiKey = "Bearer"
+    let yelpManager = YelpManager()
     
-    struct Restaurant : Decodable {
-        let id: String?
-        let alias: String?
-        let name: String?
-        let image_url: URL?
-        let categories : [Categories]
-        let rating: Double?
-        
-    }
     
-    struct Categories : Decodable {
-        let alias : String?
-        let title : String?
-    }
-    
-    struct User: Codable {
-        
-        
-        var id: Int?
-        var firstName: String?
-        var lastName: String?
-        var avatar: String?
-
-    }
     
     var selectedPin : MKPlacemark? = nil
     
@@ -95,45 +72,6 @@ class MapViewController: UIViewController {
         definesPresentationContext = true
         restaurantSearchTable.handleMapSearchDelegate = self
         
-        let yelpApiURL = "https://api.yelp.com/v3/businesses/ramen-danbo-vancouver-3"
-//        let yelpApiURL = "https://reqres.in/api/users/1"
-        guard let yelpURL = URL(string: yelpApiURL) else {return}
-        
-        let yelpURLYo = yelpURL.appendingPathComponent("yo1").appendingPathComponent("yo2")
-        print(yelpURLYo.absoluteString)
-        var request = URLRequest(url: yelpURL)
-        request.addValue(apiKey, forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, err) in
-            
-            
-            
-            if let err = err {
-                print("Failed to authenticate restaurant", err)
-            }
-            
-            if let response = response {
-                print(response)
-            }
-            guard let data = data else {return}
-//            let string = String(data: data, encoding: .utf8)
-            
-//            print(string)
-            
-            do {
-                let restaurant = try JSONDecoder().decode(Restaurant.self, from: data)
-
-                print(restaurant)
-                print(restaurant.categories)
-                
-            } catch let jsonErr{
-                print("Error serializing json:", jsonErr.localizedDescription)
-            }
-            
-        }.resume()
-    
-        
         
     }
 
@@ -175,6 +113,7 @@ extension MapViewController : CLLocationManagerDelegate {
         if let location = locations.first {
             let regionRadius: CLLocationDistance = 1000
             let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius,longitudinalMeters: regionRadius)
+            yelpManager.coordinate = location.coordinate
             mapView.setRegion(coordinateRegion, animated: true)
         }
     }
@@ -188,7 +127,13 @@ extension MapViewController : CLLocationManagerDelegate {
 extension MapViewController : UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("MapViewController searchbar Text ",searchBar.text!)
+        if let searchText = searchBar.text {
+            yelpManager.searchText = searchText
+        }
+        yelpManager.searchEndPoint()
         searchBar.resignFirstResponder()
+        
     }
 }
 
