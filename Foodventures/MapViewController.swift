@@ -114,6 +114,7 @@ extension MapViewController : CLLocationManagerDelegate {
             let regionRadius: CLLocationDistance = 1000
             let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius,longitudinalMeters: regionRadius)
             yelpManager.coordinate = location.coordinate
+            print(location.coordinate.latitude,location.coordinate.longitude)
             mapView.setRegion(coordinateRegion, animated: true)
         }
     }

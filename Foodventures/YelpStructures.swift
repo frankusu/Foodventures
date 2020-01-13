@@ -14,7 +14,7 @@ struct Restaurant : Decodable {
     let alias: String?
     let name: String?
     let image_url: URL?
-    let categories : [Categories]
+    let categories : [Categories]?
     let rating: Double?
     
 }
