@@ -8,6 +8,10 @@
 
 import Foundation
 
+// For search business results
+struct Businesses : Decodable {
+    let businesses : [Restaurant]
+}
 
 struct Restaurant : Decodable {
     let id: String?
@@ -23,3 +27,5 @@ struct Categories : Decodable {
     let alias : String?
     let title : String?
 }
+
+

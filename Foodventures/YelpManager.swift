@@ -54,27 +54,39 @@ class YelpManager {
 
         URLSession.shared.dataTask(with: request) { (data, response, err) in
 
-        if let err = err {
-        print("Failed to authenticate restaurant", err)
-        }
+            if let err = err {
+                print("Failed to authenticate restaurant", err)
+            }
+            
+                    if let response = response {
+                        print(response)
+                    }
+            //        guard let data = data else {return}
+            //            let string = String(data: data, encoding: .utf8)
+            //            print(string)
+            
+            guard let data = data else {print("No data to be returned");return}
+            
+            do {
+                let businesses = try JSONDecoder().decode(Businesses.self, from: data)
+                
+                
+                let restaurantArray = businesses.businesses
         
-        if let response = response {
-            print(response)
-        }
-        guard let data = data else {return}
-            let string = String(data: data, encoding: .utf8)
-            print(string)
-        
-        do {
-        let restaurant = try JSONDecoder().decode(Restaurant.self, from: data)
-        
-        print(restaurant)
-        print(restaurant.categories)
-        
-        } catch let jsonErr{
-        print("Error serializing json:", jsonErr.localizedDescription)
-        }
-        
+                restaurantArray.forEach { (restaurant) in
+                    print("------------------------ REST -----------------------")
+                    print(restaurant.alias!)
+                    
+                    restaurant.categories?.forEach({ (category) in
+                        print(category.alias!)
+                    })
+                }
+                
+                
+            } catch let jsonErr{
+                print("Error serializing json:", jsonErr.localizedDescription)
+            }
+            
         }.resume()
     }
     
