@@ -22,22 +22,15 @@ class MapViewController: UIViewController {
     //MARK: Properties
     let locationManager = CLLocationManager()
     var restaurantSearchTable = RestaurantSearchTable()
+    let regionSpanInMeters : Double = 5000
     lazy var searchController = UISearchController(searchResultsController: restaurantSearchTable)
-    
     let yelpManager = YelpManager()
-    
-    
-    
     var selectedPin : MKPlacemark? = nil
     
     let mapView : MKMapView = {
         let map = MKMapView()
-        
         map.translatesAutoresizingMaskIntoConstraints = false
-        map.showsUserLocation = true
 //        let initialLocation = CLLocation(latitude: 49.246292, longitude: -123.116226)
-
-        
         return map
     }()
     
@@ -49,45 +42,24 @@ class MapViewController: UIViewController {
         searchController.searchBar.autocapitalizationType = .none
         searchController.searchBar.sizeToFit()
         searchController.obscuresBackgroundDuringPresentation = false
-//        searchController.delegate = self //what does this really do ?
         searchController.searchBar.placeholder = MapViewController.SearchPlaceHolder
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
         setUpSearchController()
-        setUpCurrentLocation()
+        checkLocationServices()
         setUpViews()
-        
-        
-       
-        
+
         navigationItem.title = MapViewController.Foodventures
-        
         navigationItem.searchController = searchController
         definesPresentationContext = true
         restaurantSearchTable.handleMapSearchDelegate = self
-        
-        
     }
-
-    //TODO: How to pass in search parameters to API
     
-    //MARK: Methods
-    
-    func setUpCurrentLocation() {
-        // could take time for requested info to come back, use delegate to handle asynch
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-
-    }
-
     private func setUpViews() {
         // add subviews before constraints or throw anchors reference items in different view hierarchies? That's illegal
         view.addSubview(mapView)
@@ -99,24 +71,66 @@ class MapViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+    //MARK: Location Methods
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            setUpLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // Show alert letting user know they need to turn on system wide location services
+        }
+    }
+    
+    func setUpLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            centerViewOnUserLocation()
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            // Show alert instructing them how to turn on permissions
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            // Active restrictions such as parental control or something
+            break
+        case .authorizedAlways:
+            // HIG says don't use this bad boi
+            break
+            
+        @unknown default:
+            fatalError("authorizationStatus case not implemented")
+        }
+    }
+    
+    func centerViewOnUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+
     
 }
 //MARK: - CLLocationManagerDelegate
 extension MapViewController : CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        }
+        checkLocationAuthorization()
     }
     // Shows user current location.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            let regionRadius: CLLocationDistance = 1000
-            let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius,longitudinalMeters: regionRadius)
-            yelpManager.coordinate = location.coordinate
-            print(location.coordinate.latitude,location.coordinate.longitude)
-            mapView.setRegion(coordinateRegion, animated: true)
-        }
+        guard let location = locations.last else {return}
+        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
+        mapView.setRegion(region, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
