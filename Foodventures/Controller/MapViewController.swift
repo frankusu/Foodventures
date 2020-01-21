@@ -22,8 +22,9 @@ class MapViewController: UIViewController {
     //MARK: Properties
     let locationManager = CLLocationManager()
     var restaurantSearchTable = RestaurantSearchTable()
+    var resultsViewController = ResultsViewController()
     let regionSpanInMeters : Double = 5000
-    lazy var searchController = UISearchController(searchResultsController: restaurantSearchTable)
+    lazy var searchController = UISearchController(searchResultsController: resultsViewController)
     let yelpManager = YelpManager()
     var selectedPin : MKPlacemark? = nil
     
@@ -36,7 +37,7 @@ class MapViewController: UIViewController {
     
     private func setUpSearchController() {
         
-        restaurantSearchTable.mapView = mapView
+        resultsViewController.mapView = mapView
         // Assign searchResultsUpdater delegate to restaurantTable
         searchController.searchResultsUpdater = restaurantSearchTable
         searchController.searchBar.autocapitalizationType = .none
@@ -57,7 +58,7 @@ class MapViewController: UIViewController {
         navigationItem.title = MapViewController.Foodventures
         navigationItem.searchController = searchController
         definesPresentationContext = true
-        restaurantSearchTable.handleMapSearchDelegate = self
+//        restaurantSearchTable.handleMapSearchDelegate = self
     }
     
     private func setUpViews() {
@@ -127,11 +128,17 @@ extension MapViewController : CLLocationManagerDelegate {
         checkLocationAuthorization()
     }
     // Shows user current location.
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {return}
-        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
-        mapView.setRegion(region, animated: true)
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let location = locations.last else {return}
+//        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
+//        yelpManager.coordinate = location.coordinate
+//        mapView.setRegion(region, animated: true)
+//    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        locationManager.stopUpdatingLocation()
     }
+    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error:: \(error)")

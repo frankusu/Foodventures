@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E731E9423D6CF0D006E58AB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E731E9323D6CF0D006E58AB /* ResultsViewController.swift */; };
 		4E9198AD23C4590000F5F7AD /* YelpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9198AC23C4590000F5F7AD /* YelpManager.swift */; };
-		4E9198AF23C6ACDC00F5F7AD /* YelpStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9198AE23C6ACDC00F5F7AD /* YelpStructures.swift */; };
+		4E9198AF23C6ACDC00F5F7AD /* YelpModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9198AE23C6ACDC00F5F7AD /* YelpModels.swift */; };
 		4EDD627E23B9AC72007B2861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD627D23B9AC72007B2861 /* AppDelegate.swift */; };
 		4EDD628023B9AC72007B2861 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD627F23B9AC72007B2861 /* SceneDelegate.swift */; };
 		4EDD628223B9AC72007B2861 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD628123B9AC72007B2861 /* MapViewController.swift */; };
@@ -19,8 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E731E9323D6CF0D006E58AB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		4E9198AC23C4590000F5F7AD /* YelpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpManager.swift; sourceTree = "<group>"; };
-		4E9198AE23C6ACDC00F5F7AD /* YelpStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpStructures.swift; sourceTree = "<group>"; };
+		4E9198AE23C6ACDC00F5F7AD /* YelpModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpModels.swift; sourceTree = "<group>"; };
 		4EDD627A23B9AC72007B2861 /* Foodventures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodventures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EDD627D23B9AC72007B2861 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EDD627F23B9AC72007B2861 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E731E9023D6BA4E006E58AB /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4E9198AC23C4590000F5F7AD /* YelpManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		4E731E9123D6BA53006E58AB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4E9198AE23C6ACDC00F5F7AD /* YelpModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4E731E9223D6BA65006E58AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4EDD629123BADF39007B2861 /* RestaurantSearchTable.swift */,
+				4EDD628123B9AC72007B2861 /* MapViewController.swift */,
+				4E731E9323D6CF0D006E58AB /* ResultsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		4EDD627123B9AC72007B2861 = {
 			isa = PBXGroup;
 			children = (
@@ -62,12 +90,11 @@
 		4EDD627C23B9AC72007B2861 /* Foodventures */ = {
 			isa = PBXGroup;
 			children = (
+				4E731E9123D6BA53006E58AB /* Model */,
+				4E731E9023D6BA4E006E58AB /* Service */,
 				4EDD627D23B9AC72007B2861 /* AppDelegate.swift */,
+				4E731E9223D6BA65006E58AB /* Controller */,
 				4EDD627F23B9AC72007B2861 /* SceneDelegate.swift */,
-				4EDD628123B9AC72007B2861 /* MapViewController.swift */,
-				4EDD629123BADF39007B2861 /* RestaurantSearchTable.swift */,
-				4E9198AC23C4590000F5F7AD /* YelpManager.swift */,
-				4E9198AE23C6ACDC00F5F7AD /* YelpStructures.swift */,
 				4EDD628323B9AC72007B2861 /* Main.storyboard */,
 				4EDD628623B9AC7B007B2861 /* Assets.xcassets */,
 				4EDD628823B9AC7B007B2861 /* LaunchScreen.storyboard */,
@@ -148,8 +175,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EDD628223B9AC72007B2861 /* MapViewController.swift in Sources */,
-				4E9198AF23C6ACDC00F5F7AD /* YelpStructures.swift in Sources */,
+				4E9198AF23C6ACDC00F5F7AD /* YelpModels.swift in Sources */,
 				4E9198AD23C4590000F5F7AD /* YelpManager.swift in Sources */,
+				4E731E9423D6CF0D006E58AB /* ResultsViewController.swift in Sources */,
 				4EDD629223BADF39007B2861 /* RestaurantSearchTable.swift in Sources */,
 				4EDD627E23B9AC72007B2861 /* AppDelegate.swift in Sources */,
 				4EDD628023B9AC72007B2861 /* SceneDelegate.swift in Sources */,

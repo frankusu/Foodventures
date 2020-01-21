@@ -1,5 +1,5 @@
 //
-//  YelpStructures.swift
+//  YelpModels.swift
 //  Foodventures
 //
 //  Created by Frank Su on 2020-01-08.
