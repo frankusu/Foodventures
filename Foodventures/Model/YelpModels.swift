@@ -18,15 +18,14 @@ struct Restaurant : Decodable {
     let name: String
     let image_url: URL
     let categories : [Categories]?
-    let rating: Double?
-    let price : String
-    let location : [Location]
+    let rating: Float?
+    let price : String?
+//    let location : [String : [String]] dictionary with nested array
     
 }
 
-struct Location : Decodable {
-    let city : String
-}
+
+
 struct Categories : Decodable {
     let alias : String
     let title : String

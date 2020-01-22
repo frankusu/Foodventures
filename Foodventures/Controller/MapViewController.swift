@@ -21,11 +21,11 @@ class MapViewController: UIViewController {
     
     //MARK: Properties
     let locationManager = CLLocationManager()
-    var restaurantSearchTable = RestaurantSearchTable()
+//    var restaurantSearchTable = RestaurantSearchTable()
     var resultsViewController = ResultsViewController()
     let regionSpanInMeters : Double = 5000
     lazy var searchController = UISearchController(searchResultsController: resultsViewController)
-    let yelpManager = YelpManager()
+    let serviceManager = Service()
     var selectedPin : MKPlacemark? = nil
     
     let mapView : MKMapView = {
@@ -39,7 +39,7 @@ class MapViewController: UIViewController {
         
         resultsViewController.mapView = mapView
         // Assign searchResultsUpdater delegate to restaurantTable
-        searchController.searchResultsUpdater = restaurantSearchTable
+//        searchController.searchResultsUpdater = resultsViewController
         searchController.searchBar.autocapitalizationType = .none
         searchController.searchBar.sizeToFit()
         searchController.obscuresBackgroundDuringPresentation = false
@@ -128,18 +128,18 @@ extension MapViewController : CLLocationManagerDelegate {
         checkLocationAuthorization()
     }
     // Shows user current location.
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        guard let location = locations.last else {return}
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {return}
 //        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
-//        yelpManager.coordinate = location.coordinate
+        //TODO:  Doesn't pass in coordinates
+        serviceManager.coordinate = location.coordinate
 //        mapView.setRegion(region, animated: true)
-//    }
+    }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         locationManager.stopUpdatingLocation()
     }
-    
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error:: \(error)")
     }
@@ -151,9 +151,10 @@ extension MapViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("MapViewController searchbar Text ",searchBar.text!)
         if let searchText = searchBar.text {
-            yelpManager.searchText = searchText
+            
+            resultsViewController.fetchYelpData(searchText: searchText)
         }
-        yelpManager.searchEndPoint()
+        
         searchBar.resignFirstResponder()
         
     }
