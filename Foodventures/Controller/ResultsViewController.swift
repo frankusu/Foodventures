@@ -17,14 +17,14 @@ class ResultsViewController: UICollectionViewController, UICollectionViewDelegat
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: view.frame.width, height: 250)
+        return CGSize.init(width: view.frame.width, height: 130)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(ResultsCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
     }
 
