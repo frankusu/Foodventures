@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E731E9423D6CF0D006E58AB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E731E9323D6CF0D006E58AB /* ResultsViewController.swift */; };
 		4E731E9723D7C1B1006E58AB /* ResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E731E9623D7C1B1006E58AB /* ResultsCell.swift */; };
+		4E731E9A23D7D2AA006E58AB /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E731E9923D7D2AA006E58AB /* ApiKey.swift */; };
 		4E9198AD23C4590000F5F7AD /* YelpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9198AC23C4590000F5F7AD /* YelpManager.swift */; };
 		4E9198AF23C6ACDC00F5F7AD /* YelpModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E9198AE23C6ACDC00F5F7AD /* YelpModels.swift */; };
 		4EDD627E23B9AC72007B2861 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDD627D23B9AC72007B2861 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		4E731E9323D6CF0D006E58AB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		4E731E9623D7C1B1006E58AB /* ResultsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCell.swift; sourceTree = "<group>"; };
+		4E731E9923D7D2AA006E58AB /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		4E9198AC23C4590000F5F7AD /* YelpManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpManager.swift; sourceTree = "<group>"; };
 		4E9198AE23C6ACDC00F5F7AD /* YelpModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpModels.swift; sourceTree = "<group>"; };
 		4EDD627A23B9AC72007B2861 /* Foodventures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodventures.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4E731E9823D7D28F006E58AB /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				4E731E9923D7D2AA006E58AB /* ApiKey.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
 		4EDD627123B9AC72007B2861 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 		4EDD627C23B9AC72007B2861 /* Foodventures */ = {
 			isa = PBXGroup;
 			children = (
+				4E731E9823D7D28F006E58AB /* Api */,
 				4E731E9523D7C178006E58AB /* Views */,
 				4E731E9123D6BA53006E58AB /* Model */,
 				4E731E9023D6BA4E006E58AB /* Service */,
@@ -192,6 +203,7 @@
 				4EDD629223BADF39007B2861 /* RestaurantSearchTable.swift in Sources */,
 				4EDD627E23B9AC72007B2861 /* AppDelegate.swift in Sources */,
 				4E731E9723D7C1B1006E58AB /* ResultsCell.swift in Sources */,
+				4E731E9A23D7D2AA006E58AB /* ApiKey.swift in Sources */,
 				4EDD628023B9AC72007B2861 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

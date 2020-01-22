@@ -12,12 +12,12 @@
 
 
 import Foundation
+import MapKit
 
 class YelpManager {
     
     
     //MARK: Properties
-    let apiKey = "Bearer "
     let yelpApiURL = "https://api.yelp.com/v3/businesses/search"
     
     var searchText : String?
