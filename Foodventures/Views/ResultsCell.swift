@@ -16,41 +16,42 @@ class ResultsCell: UICollectionViewCell {
         iv.widthAnchor.constraint(equalToConstant: 128).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 128).isActive = true
         iv.layer.cornerRadius = 16
+        iv.clipsToBounds = true
+        iv.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
+        iv.layer.borderWidth = 0.5
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     
     let nameLabel : UILabel = {
         let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 20)
         label.text = "Kraby Paddy"
-        label.backgroundColor = .green
+        label.numberOfLines = 0
         return label
     }()
     
     let locationLabel : UILabel = {
         let label = UILabel()
         label.text = "Bikini Bottom"
-        label.backgroundColor = .green
         return label
     }()
     
     let aliasLabel : UILabel = {
         let label = UILabel()
         label.text = "Burgers"
-        label.backgroundColor = .green
         return label
     }()
     
     let priceLabel : UILabel = {
         let label = UILabel()
         label.text = "$"
-        label.backgroundColor = .green
         return label
     }()
     
     let ratingsLabel : UILabel = {
         let label = UILabel()
         label.text = "10/10"
-        label.backgroundColor = .green
         return label
     }()
     

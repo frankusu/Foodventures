@@ -23,13 +23,14 @@ class Service {
     var coordinate : CLLocationCoordinate2D?
     var latitude : String = ""
     var longitude : String = ""
-    
+    //ensemble 49.172096, -123.072675
+    //home 49.18438740454178 -122.82581713567531
     func fetchYelp(searchText : String, completion: @escaping ([Restaurant],Error?) -> ()) {
         convertCoordinates()
         guard let searchUrl = URL(string: searchUrlString) else { return}
         let finalUrl = searchUrl.addQueryParam("term", value: searchText)
-            .addQueryParam("latitude", value: "49.18438740454178" )
-            .addQueryParam("longitude", value: "-122.82581713567531")
+            .addQueryParam("latitude", value: "49.172096" )
+            .addQueryParam("longitude", value: "-123.072675")
         
         var request = URLRequest(url: finalUrl)
         print(request, apiKey)

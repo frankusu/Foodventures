@@ -16,7 +16,7 @@ struct Businesses : Decodable {
 struct Restaurant : Decodable {
     let id: String
     let name: String
-    let image_url: URL
+    let image_url: String
     let categories : [Categories]?
     let rating: Float?
     let price : String?

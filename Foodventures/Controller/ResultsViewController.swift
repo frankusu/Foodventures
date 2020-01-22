@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SDWebImage
 
 private let reuseIdentifier = "Cell"
 
@@ -29,7 +30,7 @@ class ResultsViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: view.frame.width, height: 130)
+        return CGSize.init(width: view.frame.width, height: 140)
     }
     
     
@@ -49,14 +50,15 @@ class ResultsViewController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ResultsCell
         let restaurantResult = restaurantResults[indexPath.item]
-        cell.backgroundColor = .red
+        cell.backgroundColor = .white
+        cell.foodImageView.sd_setImage(with: URL(string:restaurantResult.image_url))
         cell.nameLabel.text = restaurantResult.name
         if let categories = restaurantResult.categories {
             cell.aliasLabel.text = categories[0].alias
         } else {
             cell.aliasLabel.text = "Food"
         }
-        
+        cell.priceLabel.text = restaurantResult.price
         cell.ratingsLabel.text = String(restaurantResult.rating ?? 0)
     
         return cell
