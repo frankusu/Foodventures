@@ -14,18 +14,22 @@ struct Businesses : Decodable {
 }
 
 struct Restaurant : Decodable {
-    let id: String?
-    let alias: String?
-    let name: String?
-    let image_url: URL?
+    let id: String
+    let name: String
+    let image_url: URL
     let categories : [Categories]?
     let rating: Double?
+    let price : String
+    let location : [Location]
     
 }
 
+struct Location : Decodable {
+    let city : String
+}
 struct Categories : Decodable {
-    let alias : String?
-    let title : String?
+    let alias : String
+    let title : String
 }
 
 
