@@ -31,7 +31,6 @@ class Service {
         let finalUrl = searchUrl.addQueryParam("term", value: searchText)
             .addQueryParam("latitude", value: "49.172096" )
             .addQueryParam("longitude", value: "-123.072675")
-        
         var request = URLRequest(url: finalUrl)
         print(request, apiKey)
         request.addValue(apiKey, forHTTPHeaderField: "Authorization")
@@ -106,7 +105,9 @@ extension URL {
         
         //create query item
         guard let value = value else { return absoluteURL }
-        let queryItem = URLQueryItem(name: queryKey, value: value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
+        //Yelp api likes spaces. Don't need PercentEncoding
+//        let queryItem = URLQueryItem(name: queryKey, value: value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
+        let queryItem = URLQueryItem(name: queryKey, value: value)
         
         //append the new query item into existing query items array
         queryItems.append(queryItem)

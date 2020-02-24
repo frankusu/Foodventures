@@ -12,7 +12,7 @@ class ResultsCell: UICollectionViewCell {
     
     let foodImageView : UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .yellow
+        iv.backgroundColor = .white
         iv.widthAnchor.constraint(equalToConstant: 128).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 128).isActive = true
         iv.layer.cornerRadius = 16

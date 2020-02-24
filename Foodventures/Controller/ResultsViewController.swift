@@ -51,7 +51,7 @@ class ResultsViewController: UICollectionViewController, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ResultsCell
         let restaurantResult = restaurantResults[indexPath.item]
         cell.backgroundColor = .white
-        cell.foodImageView.sd_setImage(with: URL(string:restaurantResult.image_url))
+        cell.foodImageView.sd_setImage(with: URL(string:restaurantResult.image_url), placeholderImage: #imageLiteral(resourceName: "placeholder"))
         cell.nameLabel.text = restaurantResult.name
         if let categories = restaurantResult.categories {
             cell.aliasLabel.text = categories[0].alias
