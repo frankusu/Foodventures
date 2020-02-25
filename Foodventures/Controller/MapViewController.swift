@@ -79,6 +79,10 @@ class MapViewController: UIViewController {
             checkLocationAuthorization()
         } else {
             // Show alert letting user know they need to turn on system wide location services
+            let alert = UIAlertController(title: "Location Services Disabled", message: "Please Enable Location Services in Settings->Privacy->Location Services ->On", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -90,20 +94,25 @@ class MapViewController: UIViewController {
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
+            print("Location authorized when in use")
             mapView.showsUserLocation = true
             centerViewOnUserLocation()
             locationManager.startUpdatingLocation()
             break
         case .denied:
             // Show alert instructing them how to turn on permissions
+            print("Location .denied")
             break
         case .notDetermined:
+            print("Location not determined")
             locationManager.requestWhenInUseAuthorization()
             break
         case .restricted:
+            print("Location .restricted")
             // Active restrictions such as parental control or something
             break
         case .authorizedAlways:
+            print("Location authorized Always")
             // HIG says don't use this bad boi
             break
             
@@ -114,6 +123,7 @@ class MapViewController: UIViewController {
     
     func centerViewOnUserLocation() {
         if let location = locationManager.location?.coordinate {
+            print("latitude \(location.latitude) and \(location.longitude)")
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
             mapView.setRegion(region, animated: true)
         }
@@ -124,16 +134,16 @@ class MapViewController: UIViewController {
 //MARK: - CLLocationManagerDelegate
 extension MapViewController : CLLocationManagerDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        checkLocationAuthorization()
-    }
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        checkLocationAuthorization()
+//    }
     // Shows user current location.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {return}
-//        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
+        let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
         //TODO:  Doesn't pass in coordinates
         serviceManager.coordinate = location.coordinate
-//        mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
@@ -151,7 +161,6 @@ extension MapViewController : UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("MapViewController searchbar Text ",searchBar.text!)
         if let searchText = searchBar.text {
-            
             resultsViewController.fetchYelpData(searchText: searchText)
         }
         
