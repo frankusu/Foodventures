@@ -32,8 +32,7 @@ class ResultsViewController: UICollectionViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: view.frame.width, height: 140)
     }
-    
-    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(ResultsCell.self, forCellWithReuseIdentifier: reuseIdentifier)

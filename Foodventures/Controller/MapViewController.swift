@@ -15,7 +15,6 @@ protocol HandleMapSearch {
 
 class MapViewController: UIViewController {
 
-    
     static let Foodventures = "Foodventures"
     static let SearchPlaceHolder = "Search for a restaurant"
     
@@ -31,7 +30,8 @@ class MapViewController: UIViewController {
     let mapView : MKMapView = {
         let map = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
-//        let initialLocation = CLLocation(latitude: 49.246292, longitude: -123.116226)
+        let initialLocation = CLLocation(latitude: 49.276557, longitude: -123.119759)
+//      slack   49.276557, -123.119759
         return map
     }()
     
@@ -49,22 +49,19 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
+        view.addSubview(mapView)
         setUpSearchController()
-        checkLocationServices()
         setUpViews()
 
         navigationItem.title = MapViewController.Foodventures
         navigationItem.searchController = searchController
-        definesPresentationContext = true
+//        definesPresentationContext = true
 //        restaurantSearchTable.handleMapSearchDelegate = self
+        checkLocationServices()
     }
     
     private func setUpViews() {
-        // add subviews before constraints or throw anchors reference items in different view hierarchies? That's illegal
-        view.addSubview(mapView)
-    
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -134,15 +131,15 @@ class MapViewController: UIViewController {
 //MARK: - CLLocationManagerDelegate
 extension MapViewController : CLLocationManagerDelegate {
     
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        checkLocationAuthorization()
-//    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
+    }
     // Shows user current location.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {return}
         let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
         //TODO:  Doesn't pass in coordinates
-        serviceManager.coordinate = location.coordinate
+//        serviceManager.coordinate = location.coordinate
         mapView.setRegion(region, animated: true)
     }
     
@@ -170,23 +167,23 @@ extension MapViewController : UISearchBarDelegate {
 }
 
 //MARK: - HandelMapSearch
-extension MapViewController : HandleMapSearch {
-    func dropPinZoomIn(placemark: MKPlacemark) {
-        // cache the pin
-        selectedPin = placemark
-        // clear exisiting pins
-        mapView.removeAnnotations(mapView.annotations)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        if let city = placemark.locality, let state = placemark.administrativeArea {
-            annotation.subtitle = "\(city) \(state)"
-        }
-        mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
-        mapView.setRegion(region, animated: true)
-    }
-}
+//extension MapViewController : HandleMapSearch {
+//    func dropPinZoomIn(placemark: MKPlacemark) {
+//        // cache the pin
+//        selectedPin = placemark
+//        // clear exisiting pins
+//        mapView.removeAnnotations(mapView.annotations)
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = placemark.coordinate
+//        annotation.title = placemark.name
+//        if let city = placemark.locality, let state = placemark.administrativeArea {
+//            annotation.subtitle = "\(city) \(state)"
+//        }
+//        mapView.addAnnotation(annotation)
+//        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+//        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+//        mapView.setRegion(region, animated: true)
+//    }
+//}
 
 

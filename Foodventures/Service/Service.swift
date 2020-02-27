@@ -29,8 +29,8 @@ class Service {
         convertCoordinates()
         guard let searchUrl = URL(string: searchUrlString) else { return}
         let finalUrl = searchUrl.addQueryParam("term", value: searchText)
-            .addQueryParam("latitude", value: "49.172096" )
-            .addQueryParam("longitude", value: "-123.072675")
+            .addQueryParam("latitude", value: "49.276557" )
+            .addQueryParam("longitude", value: "-123.119759")
         var request = URLRequest(url: finalUrl)
         print(request, apiKey)
         request.addValue(apiKey, forHTTPHeaderField: "Authorization")

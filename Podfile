@@ -4,9 +4,9 @@ platform :ios, '13.0'
 target 'Foodventures' do
   # Comment the next line if you don't want to use dynamic frameworks
   #use_frameworks!
-  use_modular_headers!
+  #use_modular_headers!
 
   # Pods for Foodventures
-  pod 'SDWebImage'
+  pod 'SDWebImage', :modular_headers => true
 
 end
