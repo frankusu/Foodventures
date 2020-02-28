@@ -20,17 +20,13 @@ class Service {
     //MARK: Properties
     let searchUrlString = "https://api.yelp.com/v3/businesses/search"
     //apiKey is in untracked git file use apiKey = "Bearer secret_api_string"
-    var coordinate : CLLocationCoordinate2D?
-    var latitude : String = ""
-    var longitude : String = ""
-    //ensemble 49.172096, -123.072675
-    //home 49.18438740454178 -122.82581713567531
+    var coordinate : (String,String)?
     func fetchYelp(searchText : String, completion: @escaping ([Restaurant],Error?) -> ()) {
-        convertCoordinates()
+        guard let coordinate = coordinate else { print("Coordinate in service is nil"); return}
         guard let searchUrl = URL(string: searchUrlString) else { return}
         let finalUrl = searchUrl.addQueryParam("term", value: searchText)
-            .addQueryParam("latitude", value: "49.276557" )
-            .addQueryParam("longitude", value: "-123.119759")
+            .addQueryParam("latitude", value: coordinate.0 )
+            .addQueryParam("longitude", value: coordinate.1)
         var request = URLRequest(url: finalUrl)
         print(request, apiKey)
         request.addValue(apiKey, forHTTPHeaderField: "Authorization")
@@ -117,23 +113,5 @@ extension URL {
         
         //returns the url from new url components
         return urlComponenets.url!
-    }
-}
-extension Service{
-    
-    func convertCoordinates() {
-        if let coordinate = coordinate{
-            let doubleLat = Double(coordinate.latitude)
-            let doubleLong = Double(coordinate.longitude)
-            latitude = doubleLat.toString()
-            longitude = doubleLong.toString()
-            print("What are lat and long", latitude,longitude)
-        }
-    }
-}
-
-extension Double {
-    func toString() -> String {
-        return String(format: "%.14f", self)
     }
 }

@@ -61,21 +61,13 @@ class MapViewController: UIViewController {
         checkLocationServices()
     }
     
-    private func setUpViews() {
-        NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: view.topAnchor),
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-    }
+
     //MARK: Location Methods
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             setUpLocationManager()
             checkLocationAuthorization()
         } else {
-            // Show alert letting user know they need to turn on system wide location services
             let alert = UIAlertController(title: "Location Services Disabled", message: "Please Enable Location Services in Settings->Privacy->Location Services ->On", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
@@ -122,10 +114,21 @@ class MapViewController: UIViewController {
         if let location = locationManager.location?.coordinate {
             print("latitude \(location.latitude) and \(location.longitude)")
             let region = MKCoordinateRegion(center: location, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
+            let latitude = "\(location.latitude)"
+            let longitude = "\(location.longitude)"
+            Service.shared.coordinate = (latitude,longitude)
             mapView.setRegion(region, animated: true)
         }
     }
-
+    
+    private func setUpViews() {
+        NSLayoutConstraint.activate([
+            mapView.topAnchor.constraint(equalTo: view.topAnchor),
+            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
     
 }
 //MARK: - CLLocationManagerDelegate
@@ -134,12 +137,13 @@ extension MapViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
-    // Shows user current location.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {return}
         let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: regionSpanInMeters, longitudinalMeters: regionSpanInMeters)
-        //TODO:  Doesn't pass in coordinates
-//        serviceManager.coordinate = location.coordinate
+        let latitude = "\(location.coordinate.latitude)"
+        let longitude = "\(location.coordinate.longitude)"
+        print("locationManager lat and long is ", latitude, longitude)
+        Service.shared.coordinate = (latitude,longitude)
         mapView.setRegion(region, animated: true)
     }
     
